@@ -46,6 +46,11 @@
 			<artifactId>posts</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
+		<dependency>
+			<groupId>de.aw.blog</groupId>
+			<artifactId>comments</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
 
 	</dependencies>
 
@@ -93,7 +98,8 @@
 						<configuration>
 							<allowInsecureRegistries>true</allowInsecureRegistries>
 							<to>
-								<image>localhost:5000/aw/blog-google-mysql:${project.version}</image>
+								<image>localhost:5000/aw/blog-google-mysql:${project.version}
+								</image>
 							</to>
 							<from>
 								<image>docker://adoptopenjdk:14-jre-hotspot</image>
