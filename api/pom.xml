@@ -9,5 +9,6 @@
   <packaging>pom</packaging>
   <modules>
   	<module>posts</module>
+  	<module>comments</module>
   </modules>
 </project>
