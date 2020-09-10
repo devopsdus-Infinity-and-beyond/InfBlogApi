@@ -9,12 +9,25 @@ services:
     ports: 
       - 3306:3306
   blog:
-    image: aw/blog-mysql:0.0.1-SNAPSHOT
-    ports: 
-      - 8181:8181
+    build:
+      context: .
+      args: 
+        - JAR_FILE=/app-mysql-0.0.1-SNAPSHOT.jar
     environment: 
       - MYSQL_HOST=mysql
     links:
       - mysql
     depends_on:
       - mysql
+    # deploy:
+    #   mode: replicated
+    #   replicas: 4
+  loadbalancer:
+    build:
+      context: loadbalancer-config
+    ports:
+      - 8181:80
+    # depends_on: 
+    #   - blog
+    links:
+      - "blog:blog-service"
