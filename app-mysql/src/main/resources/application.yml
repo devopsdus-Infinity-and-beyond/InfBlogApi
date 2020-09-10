@@ -11,5 +11,6 @@ spring:
     password: root
     initialization-mode: always
     platform: mysql
-      
-    
+    dbcp2:
+      test-on-borrow: true
+      validation-query: SELECT 1
