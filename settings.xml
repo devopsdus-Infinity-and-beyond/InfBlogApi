@@ -25,9 +25,9 @@
             </activation>
             <properties>
                 <deployAtEnd>true</deployAtEnd>
-                <altDeploymentRepository>nexus-snapshots::default::http://${NEXUS_HOST}/repository/maven-snapshots</altDeploymentRepository>
-                <altSnapshotDeploymentRepository>nexus-snapshots::default::http://${NEXUS_HOST}/repository/maven-snapshots</altSnapshotDeploymentRepository>
-                <altReleaseDeploymentRepository>nexus-releases::default::http://${NEXUS_HOST}/repository/maven-releases</altReleaseDeploymentRepository>
+                <altDeploymentRepository>nexus-snapshots::default::http://${NEXUS_HOST}/nexus/content/repositories/nexus-snapshots</altDeploymentRepository>
+                <altSnapshotDeploymentRepository>nexus-snapshots::default::http://${NEXUS_HOST}/nexus/content/repositories/nexus-snapshots</altSnapshotDeploymentRepository>
+                <altReleaseDeploymentRepository>nexus-releases::default::http://${NEXUS_HOST}/nexus/content/repositories/nexus-releases</altReleaseDeploymentRepository>
             </properties>
         </profile>
 

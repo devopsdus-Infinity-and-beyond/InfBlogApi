@@ -1,7 +1,7 @@
 pipeline {
     agent none
     environment {
-        NEXUS_HOST = 'nexus:8081'
+        NEXUS_HOST = 'localhost:8081'
     }
     stages {
         stage('parallel') {
