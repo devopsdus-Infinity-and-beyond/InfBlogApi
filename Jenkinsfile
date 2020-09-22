@@ -2,7 +2,6 @@ pipeline {
     agent none
     environment {
         NEXUS_HOST = 'nexus:8081'
-        DOCKER_HOST = 'unix:///var/run/docker.sock'
     }
     stages {
         stage('parallel') {
@@ -28,6 +27,7 @@ pipeline {
                     steps {
                         withCredentials([usernamePassword(credentialsId: 'nexus', usernameVariable: 'NEXUS_USER', passwordVariable: 'NEXUS_PASSWORD')]) {
                             sh '''
+                            	docker version
                                 mvn deploy -s settings.xml
                             '''
                         }
