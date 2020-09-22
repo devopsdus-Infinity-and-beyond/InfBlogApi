@@ -2,7 +2,6 @@ pipeline {
     agent none
     environment {
         NEXUS_HOST = 'nexus:8081'
-        DOCKER_HOST = 'tcp://localhost:2375'
     }
     stages {
         stage('parallel') {
