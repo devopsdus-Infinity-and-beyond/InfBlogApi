@@ -27,7 +27,8 @@ pipeline {
                     steps {
                         withCredentials([usernamePassword(credentialsId: 'nexus', usernameVariable: 'NEXUS_USER', passwordVariable: 'NEXUS_PASSWORD')]) {
                             sh '''
-                            	ls -al target
+                            	pwd
+                            	find .
                                 mvn deploy -s settings.xml
                             '''
                         }
