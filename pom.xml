@@ -8,6 +8,6 @@
   <modules>
   	<module>api</module>
   	<module>app</module>
- 	<module>app-mysql</module>
+ 	  <module>app-mysql</module>
   </modules>
 </project>
