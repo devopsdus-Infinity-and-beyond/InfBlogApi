@@ -31,3 +31,8 @@ services:
     #   - blog
     links:
       - "blog:blog-service"
+    networks:
+      - app
+networks:
+  app:
+    name: app

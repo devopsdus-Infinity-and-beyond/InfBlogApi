@@ -1,0 +1,16 @@
+{
+  "name": "integration-tests",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "newman run blog.postman_collection.json --environment docker.postman_environment.json",
+    "start:local": "newman run blog.postman_collection.json --environment localhost.postman_environment.json",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "newman": "^5.2.0"
+  }
+}

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<settings xmlns="http://maven.apache.org/SETTINGS/1.1.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.1.0 http://maven.apache.org/xsd/settings-1.1.0.xsd">
+
+  <servers>
+    <server>
+      <id>nexus-snapshots</id>
+      <username>${NEXUS_USER}</username>
+      <password>${NEXUS_PASSWORD}</password>
+    </server>
+    <server>
+      <id>nexus-releases</id>
+      <username>${NEXUS_USER}</username>
+      <password>${NEXUS_PASSWORD}</password>
+    </server>
+  </servers>
+
+    <profiles>
+        <!-- Nexus Artifactory -->
+        <profile>
+            <id>nexus</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <deployAtEnd>true</deployAtEnd>
+                <altDeploymentRepository>nexus-snapshots::default::http://${NEXUS_HOST}/repository/maven-snapshots</altDeploymentRepository>
+                <altSnapshotDeploymentRepository>nexus-snapshots::default::http://${NEXUS_HOST}/repository/maven-snapshots</altSnapshotDeploymentRepository>
+                <altReleaseDeploymentRepository>nexus-releases::default::http://${NEXUS_HOST}/repository/maven-releases</altReleaseDeploymentRepository>
+            </properties>
+        </profile>
+
+        <!-- SonarQube Server -->
+        <profile>
+            <id>sonar</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <sonar.host.url>http://localhost:8082</sonar.host.url>
+            </properties>
+        </profile>
+
+    </profiles>
+
+    <activeProfiles>
+      <activeProfile>nexus</activeProfile>
+    </activeProfiles>
+  
+
+</settings>
