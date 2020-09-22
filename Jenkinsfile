@@ -27,7 +27,6 @@ pipeline {
                     steps {
                         withCredentials([usernamePassword(credentialsId: 'nexus', usernameVariable: 'NEXUS_USER', passwordVariable: 'NEXUS_PASSWORD')]) {
                             sh '''
-                            	docker version
                                 mvn deploy -s settings.xml
                             '''
                         }
