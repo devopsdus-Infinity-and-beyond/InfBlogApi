@@ -2,6 +2,7 @@ pipeline {
     agent none
     environment {
         NEXUS_HOST = 'nexus:8081'
+        DOCKER_HOST = 'unix:///var/run/docker.sock'
     }
     stages {
         stage('parallel') {
