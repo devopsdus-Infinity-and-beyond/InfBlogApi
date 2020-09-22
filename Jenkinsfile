@@ -28,7 +28,7 @@ pipeline {
                         withCredentials([usernamePassword(credentialsId: 'nexus', usernameVariable: 'NEXUS_USER', passwordVariable: 'NEXUS_PASSWORD')]) {
                             sh '''
                             	pwd
-                            	find .
+                            	find . -name *.jar
                                 mvn deploy -s settings.xml
                             '''
                         }
