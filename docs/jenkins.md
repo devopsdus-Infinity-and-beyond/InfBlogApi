@@ -1,21 +1,19 @@
-# Install Tools in Jenkins
+# Jenkins Setup
 
-## Maven
+## Recommended Way: Using Docker for tools
 
-Just select install from apache
+The Jenkinsfile is made for this approach.
 
-![maveninstall](2020-09-04-19-46-02.png)
+[The recommended Way (Click me)](jenkins-docker-agents.md)
 
-## JDK
+## Jenkins Master Only
 
-### Install the jdk
+This approach requires to install tools on the jenkins master. This will produce unstabe results and issue with tool installs in jenkins.
+Try to avoid this!
 
-Get the newest version from [AdoptOpenJDK](https://github.com/AdoptOpenJDK/openjdk14-binaries/releases/download). Use the Linux amd64 build.
 
-![jdkinstall](2020-09-04-19-43-53.png)
+[Installation of maven and jdk](jenkins-master-only.md)
 
-### Set Paths and Variables for JDK in the global config
+## FAQ
 
-![jdkpath](2020-09-04-19-41-51.png)
-
-Warning: (Dont use jdk14 as a tool in the pipeline. This will overwrite the JAVA_HOME variable with an incorrect path)
+[faq](jenkins-faq.md)
