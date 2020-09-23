@@ -1,5 +1,8 @@
 pipeline {
     agent none
+    environment {
+        NEXUS_HOST = 'nexus:8081'
+    }
     stages {
         stage('unit tests') {
            agent {
