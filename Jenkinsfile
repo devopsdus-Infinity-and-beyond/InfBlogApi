@@ -4,8 +4,6 @@ pipeline {
         NEXUS_HOST = 'nexus:8081'
     }
     stages {
-        stage('parallel') {
-            parallel {
                 stage('unit tests') {
                     steps {
                         echo 'unit tests'
@@ -22,8 +20,6 @@ pipeline {
                         echo 'artifact package'
                     }
                 }
-            }
-        }
         stage('container runs') {
             steps {
             	echo 'container runs'
