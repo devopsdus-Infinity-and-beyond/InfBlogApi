@@ -15,10 +15,13 @@ pipeline {
            agent {
                 docker {
                     image 'maven:3.6.3-adoptopenjdk-14'
+                    args '--network tools'
                 }
             }
             steps {
-            	sh 'mvn deploy -s settings.xml'
+                withCredentials([usernamePassword(credentialsId: 'nexus', usernameVariable: 'NEXUS_USER', passwordVariable: 'NEXUS_PASSWORD')]) {
+                    sh 'mvn deploy -s settings.xml'
+                }
             }
         }
         stage('artifact package') {
