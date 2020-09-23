@@ -4,22 +4,27 @@ pipeline {
         NEXUS_HOST = 'nexus:8081'
     }
     stages {
-                stage('unit tests') {
-                    steps {
-                        echo 'unit tests'
+        stage('unit tests') {
+            agent {
+                docker {
+                    image 'maven:3.6.3-adoptopenjdk-14'
+                }
+            }
+            steps {
+                echo 'unit tests'
 
-                    }
-                 }
-                stage('nexus upload') {
-                    steps {
-                    	echo 'nexus upload'
-                    }
-                }
-                stage('artifact package') {
-                    steps {
-                        echo 'artifact package'
-                    }
-                }
+            }
+         }
+        stage('nexus upload') {
+            steps {
+            	echo 'nexus upload'
+            }
+        }
+        stage('artifact package') {
+            steps {
+                echo 'artifact package'
+            }
+        }
         stage('container runs') {
             steps {
             	echo 'container runs'
