@@ -5,14 +5,8 @@ pipeline {
     }
     stages {
         stage('unit tests') {
-            agent {
-                docker {
-                    image 'maven:3.6.3-adoptopenjdk-14'
-                }
-            }
             steps {
                 echo 'unit tests'
-				sh 'mvn test'
             }
          }
         stage('nexus upload') {
