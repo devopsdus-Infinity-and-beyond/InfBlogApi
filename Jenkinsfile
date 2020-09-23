@@ -8,7 +8,7 @@ pipeline {
                 }
             }
             steps {
-                echo 'unit tests'
+                sh 'mvn test'
             }
          }
         stage('nexus upload') {
