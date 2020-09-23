@@ -12,8 +12,13 @@ pipeline {
             }
          }
         stage('nexus upload') {
+           agent {
+                docker {
+                    image 'maven:3.6.3-adoptopenjdk-14'
+                }
+            }
             steps {
-            	echo 'nexus upload'
+            	sh 'mvn deploy -s settings.xml'
             }
         }
         stage('artifact package') {
