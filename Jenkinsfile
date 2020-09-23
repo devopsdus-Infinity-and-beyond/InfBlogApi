@@ -4,84 +4,47 @@ pipeline {
         NEXUS_HOST = 'nexus:8081'
     }
     stages {
-        stage('parallel') {
-            parallel {
-                stage('test') {
-                    agent {
-                        docker {
-                            image 'maven:3.6.3-adoptopenjdk-14'
-                        }
-                    }
-                    steps {
-                        sh 'mvn test'
-
-                    }
-                 }
-                stage('upload maven modules') {
-                    agent {
-                        docker {
-                            image 'maven:3.6.3-adoptopenjdk-14'
-                            args '--network tools'
-                        }
-                    }
-                    steps {
-                        withCredentials([usernamePassword(credentialsId: 'nexus', usernameVariable: 'NEXUS_USER', passwordVariable: 'NEXUS_PASSWORD')]) {
-                            sh '''
-                                mvn deploy -s settings.xml
-                            '''
-                        }
-                    }
-                }
-                stage('build image') {
-                    agent {
-                        docker {
-                            image 'maven:3.6.3-adoptopenjdk-14'
-                        }
-                    }
-                    steps {
-                        sh 'mvn install -DskipTests'
-                    }
-                }
-            }
-        }
-        stage('run all containers') {
-            agent {
+        stage('unit tests') {
+           agent {
                 docker {
-                    image 'docker/compose'
+                    image 'maven:3.6.3-adoptopenjdk-14'
                 }
             }
             steps {
-                dir('app-mysql'){
-                    sh 'docker-compose up --build -d'
-                }
+                sh 'mvn test'
             }
-        }
-        stage('run integration test') {
-            agent {
+         }
+        stage('nexus upload') {
+           agent {
                 docker {
-                    image 'node:12-alpine'
-                    args '--network app'
+                    image 'maven:3.6.3-adoptopenjdk-14'
+                    args '--network tools'
                 }
             }
             steps {
-                dir('integration-tests'){
-                    catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
-                        sh 'npm install'
-                        sh 'npm start'
-                    }
+                withCredentials([usernamePassword(credentialsId: 'nexus', usernameVariable: 'NEXUS_USER', passwordVariable: 'NEXUS_PASSWORD')]) {
+                    sh 'mvn deploy -s settings.xml'
                 }
             }
         }
-        stage('stop all containers') {
-            agent {
-                docker {
-                    image 'docker/compose'
-                }
-            }
+        stage('artifact package') {
             steps {
-                dir('app-mysql'){   
-                    sh 'docker-compose down'
-                }
+                echo 'artifact package'
+            }
+        }
+        stage('container runs') {
+            steps {
+            	echo 'container runs'
+            }
+        }
+        stage('integration tests') {
+            steps {
+            	echo 'integration tests'
+            }
+        }
+        stage('container stops') {
+            steps {
+            	echo 'container stops'
             }
         }
     }
