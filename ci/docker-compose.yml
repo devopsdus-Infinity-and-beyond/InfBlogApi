@@ -1,0 +1,34 @@
+version: '3.8'
+services:
+  jenkins:
+    image: jenkins/jenkins:latest
+    environment: 
+      - BLA=blub
+    ports: 
+      - 8080:8080
+    networks:
+      - tools
+    volumes:
+      - jenkins_home:/var/jenkins_home 
+      - /usr/bin/docker:/usr/bin/docker
+      - /var/run/docker.sock:/var/run/docker.sock
+  nexus:
+    image: sonatype/nexus3:latest
+    ports: 
+      - 8081:8081
+    networks:
+      - tools
+    volumes: 
+      - nexus-data:/nexus-data
+  registry:
+    image: registry:2
+    ports: 
+      - 5000:5000
+    networks:
+      - tools  
+networks:
+  tools:
+    name: tools
+volumes:
+  jenkins_home:
+  nexus-data:

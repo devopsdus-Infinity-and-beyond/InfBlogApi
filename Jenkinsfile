@@ -14,7 +14,6 @@ pipeline {
                     }
                     steps {
                         sh 'mvn test'
-
                     }
                  }
                 stage('upload maven modules') {
