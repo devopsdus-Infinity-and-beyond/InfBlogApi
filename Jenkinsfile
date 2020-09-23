@@ -1,10 +1,12 @@
 pipeline {
     agent none
-    environment {
-        NEXUS_HOST = 'nexus:8081'
-    }
     stages {
         stage('unit tests') {
+           agent {
+                docker {
+                    image 'maven:3.6.3-adoptopenjdk-14'
+                }
+            }
             steps {
                 echo 'unit tests'
             }
