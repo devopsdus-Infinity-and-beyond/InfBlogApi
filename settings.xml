@@ -24,7 +24,7 @@
                 <activeByDefault>true</activeByDefault>
             </activation>
             <properties>
-                <deployAtEnd>true</deployAtEnd>
+                <!-- <deployAtEnd>true</deployAtEnd> -->
                 <altDeploymentRepository>nexus-snapshots::default::http://${NEXUS_HOST}/repository/maven-snapshots</altDeploymentRepository>
                 <altSnapshotDeploymentRepository>nexus-snapshots::default::http://${NEXUS_HOST}/repository/maven-snapshots</altSnapshotDeploymentRepository>
                 <altReleaseDeploymentRepository>nexus-releases::default::http://${NEXUS_HOST}/repository/maven-releases</altReleaseDeploymentRepository>
