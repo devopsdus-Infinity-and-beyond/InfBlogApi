@@ -42,9 +42,11 @@ pipeline {
                         sh 'mvn install -DskipTests -P build-docker-image'
                          withCredentials([usernamePassword(credentialsId: 'docker-registry', usernameVariable: 'DOCKER_REGISTRY_USER', passwordVariable: 'DOCKER_REGISTRY_PASSWORD')]) {
                             catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
-                                sh '''
-                                    docker login -p $DOCKER_REGISTRY_PASSWORD -u $DOCKER_REGISTRY_USER localhost:5000
-                                '''
+                                dir("/var/jenkins_home"){
+                                    sh '''
+                                        docker login -p $DOCKER_REGISTRY_PASSWORD -u $DOCKER_REGISTRY_USER localhost:5000
+                                    '''
+                                }
                             }
                         }
 
@@ -61,9 +63,12 @@ pipeline {
                         sh 'mvn install -DskipTests -P build-docker-image'
                          withCredentials([usernamePassword(credentialsId: 'docker-registry', usernameVariable: 'DOCKER_REGISTRY_USER', passwordVariable: 'DOCKER_REGISTRY_PASSWORD')]) {
                             catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
-                                sh '''
-                                    docker login -p $DOCKER_REGISTRY_PASSWORD -u $DOCKER_REGISTRY_USER registry:5000
-                                '''
+                                dir("/var/jenkins_home"){
+                                    sh '''
+                                        docker login -p $DOCKER_REGISTRY_PASSWORD -u $DOCKER_REGISTRY_USER registry:5000
+
+                                    '''
+                                }
                             }
                         }
 
