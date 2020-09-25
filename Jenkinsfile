@@ -43,7 +43,9 @@ pipeline {
                          withCredentials([usernamePassword(credentialsId: 'docker-registry', usernameVariable: 'DOCKER_REGISTRY_USER', passwordVariable: 'DOCKER_REGISTRY_PASSWORD')]) {
                             catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
                                 script {
-                                    docker.withRegistry('localhost:5000', 'docker-registry') {
+                                    docker.withRegistry('https://localhost:5000', 'docker-registry') {
+                                        sh 'docker tag aw/blog-h2:0.0.1-SNAPSHOT localhost:5000/aw/blog-h2:0.0.1-SNAPSHOT'
+                                        sh 'docker tag aw/blog-mysql:0.0.1-SNAPSHOT localhost:5000/aw/blog-mysqlh2:0.0.1-SNAPSHOT'
                                         sh 'docker push aw/blog-h2:0.0.1-SNAPSHOT'
                                         sh 'docker push aw/blog-mysql:0.0.1-SNAPSHOT'
                                     }
@@ -65,7 +67,9 @@ pipeline {
                          withCredentials([usernamePassword(credentialsId: 'docker-registry', usernameVariable: 'DOCKER_REGISTRY_USER', passwordVariable: 'DOCKER_REGISTRY_PASSWORD')]) {
                             catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
                                 script {
-                                    docker.withRegistry('registry:5000', 'docker-registry') {
+                                    docker.withRegistry('https://registry:5000', 'docker-registry') {
+                                        sh 'docker tag aw/blog-h2:0.0.1-SNAPSHOT registry:5000/aw/blog-h2:0.0.1-SNAPSHOT'
+                                        sh 'docker tag aw/blog-mysql:0.0.1-SNAPSHOT registry:5000/aw/blog-mysqlh2:0.0.1-SNAPSHOT'
                                         sh 'docker push aw/blog-h2:0.0.1-SNAPSHOT'
                                         sh 'docker push aw/blog-mysql:0.0.1-SNAPSHOT'
                                     }
