@@ -46,8 +46,8 @@ pipeline {
                                     docker.withRegistry('https://localhost:5000', 'docker-registry') {
                                         sh 'docker tag aw/blog-h2:0.0.1-SNAPSHOT localhost:5000/aw/blog-h2:0.0.1-SNAPSHOT'
                                         sh 'docker tag aw/blog-mysql:0.0.1-SNAPSHOT localhost:5000/aw/blog-mysqlh2:0.0.1-SNAPSHOT'
-                                        sh 'docker push aw/blog-h2:0.0.1-SNAPSHOT'
-                                        sh 'docker push aw/blog-mysql:0.0.1-SNAPSHOT'
+                                        sh 'docker push localhost:5000/aw/blog-h2:0.0.1-SNAPSHOT'
+                                        sh 'docker push localhost:5000/aw/blog-mysql:0.0.1-SNAPSHOT'
                                     }
                                 }
                             }
@@ -70,8 +70,8 @@ pipeline {
                                     docker.withRegistry('https://registry:5000', 'docker-registry') {
                                         sh 'docker tag aw/blog-h2:0.0.1-SNAPSHOT registry:5000/aw/blog-h2:0.0.1-SNAPSHOT'
                                         sh 'docker tag aw/blog-mysql:0.0.1-SNAPSHOT registry:5000/aw/blog-mysqlh2:0.0.1-SNAPSHOT'
-                                        sh 'docker push aw/blog-h2:0.0.1-SNAPSHOT'
-                                        sh 'docker push aw/blog-mysql:0.0.1-SNAPSHOT'
+                                        sh 'docker push registry:5000/aw/blog-h2:0.0.1-SNAPSHOT'
+                                        sh 'docker push registry:5000/aw/blog-mysql:0.0.1-SNAPSHOT'
                                     }
                                 }
                             }
