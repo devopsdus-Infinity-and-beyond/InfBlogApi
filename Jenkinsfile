@@ -2,6 +2,7 @@ pipeline {
     agent none
     environment {
         NEXUS_HOST = 'nexus:8081'
+        DOCKER_NETWORK = 'tools'
     }
     stages {
         stage('parallel') {
@@ -20,7 +21,7 @@ pipeline {
                     agent {
                         docker {
                             image 'maven:3.6.3-adoptopenjdk-14'
-                            args '--network tools'
+                            args '--network $DOCKER_NETWORK'
                         }
                     }
                     steps {
@@ -35,6 +36,7 @@ pipeline {
                     agent {
                         docker {
                             image 'maven:3.6.3-adoptopenjdk-14'
+                            args '--network $DOCKER_NETWORK'
                         }
                     }
                     steps {
