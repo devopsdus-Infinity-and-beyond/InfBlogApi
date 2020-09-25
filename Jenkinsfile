@@ -38,7 +38,7 @@ pipeline {
                         }
                     }
                     steps {
-                        sh 'mvn install -DskipTests'
+                        sh 'mvn install -DskipTests -P build-docker-image'
                     }
                 }
             }
