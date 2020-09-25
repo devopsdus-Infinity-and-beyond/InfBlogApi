@@ -41,7 +41,7 @@ pipeline {
                         sh 'mvn install -DskipTests -P build-docker-image'
                          withCredentials([usernamePassword(credentialsId: 'docker-registry', usernameVariable: 'DOCKER_REGISTRY_USER', passwordVariable: 'DOCKER_REGISTRY_PASSWORD')]) {
                             sh '''
-                                docker login -p $DOCKER_REGISTRY_PASSWORD -u $DOCKER_REGISTRY_USER
+                                docker login -p $DOCKER_REGISTRY_PASSWORD -u $DOCKER_REGISTRY_USER registry:5000
                             '''
                         }
 
