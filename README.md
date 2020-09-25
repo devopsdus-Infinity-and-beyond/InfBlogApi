@@ -22,7 +22,7 @@ Using the local docker engine for everything, but can be easy changed to use a r
 
 - Automate Jenkin configuration
 - Add Sonarqube and coberture
-- docker push to registry:5000
+- [DONE] docker push to registry:5000
 
 ## FAQ
 
