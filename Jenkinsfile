@@ -42,9 +42,11 @@ pipeline {
                         sh 'mvn install -DskipTests -P build-docker-image'
                          withCredentials([usernamePassword(credentialsId: 'docker-registry', usernameVariable: 'DOCKER_REGISTRY_USER', passwordVariable: 'DOCKER_REGISTRY_PASSWORD')]) {
                             catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
-                                docker.withRegistry('localhost:5000', 'docker-registry') {
-                                    sh 'docker push aw/blog-h2:0.0.1-SNAPSHOT'
-                                    sh 'docker push aw/blog-mysql:0.0.1-SNAPSHOT'
+                                script {
+                                    docker.withRegistry('localhost:5000', 'docker-registry') {
+                                        sh 'docker push aw/blog-h2:0.0.1-SNAPSHOT'
+                                        sh 'docker push aw/blog-mysql:0.0.1-SNAPSHOT'
+                                    }
                                 }
                             }
                         }
@@ -62,9 +64,11 @@ pipeline {
                         sh 'mvn install -DskipTests -P build-docker-image'
                          withCredentials([usernamePassword(credentialsId: 'docker-registry', usernameVariable: 'DOCKER_REGISTRY_USER', passwordVariable: 'DOCKER_REGISTRY_PASSWORD')]) {
                             catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
-                                docker.withRegistry('registry:5000', 'docker-registry') {
-                                    sh 'docker push aw/blog-h2:0.0.1-SNAPSHOT'
-                                    sh 'docker push aw/blog-mysql:0.0.1-SNAPSHOT'
+                                script {
+                                    docker.withRegistry('registry:5000', 'docker-registry') {
+                                        sh 'docker push aw/blog-h2:0.0.1-SNAPSHOT'
+                                        sh 'docker push aw/blog-mysql:0.0.1-SNAPSHOT'
+                                    }
                                 }
                             }
                         }
