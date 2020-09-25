@@ -32,7 +32,25 @@ pipeline {
                         }
                     }
                 }
-                stage('build image') {
+                stage('build image - docker cli from host') {
+                    agent {
+                        docker {
+                            image 'maven:3.6.3-adoptopenjdk-14'
+                        }
+                    }
+                    steps {
+                        sh 'mvn install -DskipTests -P build-docker-image'
+                         withCredentials([usernamePassword(credentialsId: 'docker-registry', usernameVariable: 'DOCKER_REGISTRY_USER', passwordVariable: 'DOCKER_REGISTRY_PASSWORD')]) {
+                            catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+                                sh '''
+                                    docker login -p $DOCKER_REGISTRY_PASSWORD -u $DOCKER_REGISTRY_USER localhost:5000
+                                '''
+                            }
+                        }
+
+                    }
+                }
+                stage('build image - docker cli from container') {
                     agent {
                         docker {
                             image 'maven:3.6.3-adoptopenjdk-14'
@@ -42,9 +60,11 @@ pipeline {
                     steps {
                         sh 'mvn install -DskipTests -P build-docker-image'
                          withCredentials([usernamePassword(credentialsId: 'docker-registry', usernameVariable: 'DOCKER_REGISTRY_USER', passwordVariable: 'DOCKER_REGISTRY_PASSWORD')]) {
-                            sh '''
-                                docker login -p $DOCKER_REGISTRY_PASSWORD -u $DOCKER_REGISTRY_USER registry:5000
-                            '''
+                            catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+                                sh '''
+                                    docker login -p $DOCKER_REGISTRY_PASSWORD -u $DOCKER_REGISTRY_USER registry:5000
+                                '''
+                            }
                         }
 
                     }
