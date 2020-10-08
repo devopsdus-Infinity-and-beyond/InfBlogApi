@@ -1,5 +1,5 @@
 pipeline {
-    agent none
+    agent any
     environment {
         NEXUS_HOST = 'nexus:8081'
         DOCKER_NETWORK = 'tools'
